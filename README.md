@@ -50,27 +50,42 @@ PxDCA 可作為更深入的 PM／PG／PQ、對齊與追溯概念參考，但不�
 
 讓支援 `SKILL.md` 的 AI Agent 載入 [`devpdca/`](devpdca/) 目錄即可。核心判斷原則位於 [`devpdca/SKILL.md`](devpdca/SKILL.md)；較深入的工程判斷會依任務需要，從 [`devpdca/references/`](devpdca/references/) 按需載入。
 
+## 版本治理
+
+[`devpdca/`](devpdca/) 永遠代表最新且唯一供實際使用的公開版本。安裝、引用或整合 DevPDCA 時，應以此目錄為準，不應從歷史版本載入。
+
+過往的單檔版本與資料夾化規劃保存在 [`development-history/`](development-history/)；該目錄只用於追溯開發變更，不是另一個可並行使用的 Skill。
+
 ## 專案結構
 
 ```text
-devpdca/
-├─ SKILL.md
-├─ references/
-│  ├─ boundary.md
-│  ├─ evidence.md
-│  ├─ design.md
-│  ├─ alignment.md
-│  ├─ change.md
-│  └─ verification.md
-└─ evals/
-   └─ README.md
+DevPDCA/
+├─ devpdca/                 # 最新公開版本
+│  ├─ SKILL.md
+│  ├─ references/
+│  │  ├─ boundary.md
+│  │  ├─ evidence.md
+│  │  ├─ design.md
+│  │  ├─ alignment.md
+│  │  ├─ change.md
+│  │  └─ verification.md
+│  └─ evals/
+│     └─ README.md
+└─ development-history/     # 開發變更與歷史版本
+   ├─ README.md
+   ├─ DevPDCA_SKILL_v1.0.0.md
+   ├─ DevPDCA_SKILL_v1.0.1.md
+   ├─ DevPDCA_SKILL_v1.0.2.md
+   ├─ DevPDCA_SKILL_v1.0.3.md
+   └─ DevPDCA_Data_Structure_Guide_for_Codex.md
 ```
 
-- `SKILL.md`：跨任務成立的核心判斷原則與 reference 路由。
-- `references/`：只在特定情境需要時載入的深入指引。
-- `evals/`：評估 DevPDCA 是否實際改善模型行為的測試規格。
+- `devpdca/SKILL.md`：最新的核心判斷原則與 reference 路由。
+- `devpdca/references/`：只在特定情境需要時載入的深入指引。
+- `devpdca/evals/`：評估 DevPDCA 是否實際改善模型行為的測試規格。
+- `development-history/`：已封存的舊版與結構演進紀錄。
 
-目前資料夾版以 DevPDCA v1.0.3 核心為基準。
+目前最新公開版本為 DevPDCA v1.1.0；其核心以 v1.0.3 為基準，並正式採用資料夾化與 Progressive Disclosure。
 
 ## 核心原則
 

@@ -6,7 +6,7 @@ description: >
   available evidence, confirmed boundaries, and verifiable outcomes.
   It is a judgment discipline, not a fixed workflow or process engine.
 metadata:
-  version: 1.0.3
+  version: 1.1.0
 ---
 
 # DevPDCA
