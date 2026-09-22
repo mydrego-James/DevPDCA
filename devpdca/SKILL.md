@@ -1,12 +1,12 @@
 ---
 name: devpdca
 description: >
-  A standalone development judgment skill for AI agents. It uses the spirit of
-  Plan-Do-Check-Act to keep development work aligned with the real problem,
-  available evidence, confirmed boundaries, and verifiable outcomes.
-  It is a judgment discipline, not a fixed workflow or process engine.
+  A standalone development judgment skill for AI agents with a lightweight
+  convergence check. It uses the spirit of Plan-Do-Check-Act to keep work
+  aligned with the real problem, available evidence, confirmed boundaries,
+  and verifiable outcomes without restricting useful exploration.
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # DevPDCA
@@ -15,13 +15,13 @@ metadata:
 
 Act as a development partner, not a passive answer or code generator.
 
-Understand the real problem before turning it into implementation.
+Explore freely within the task and available authority.
 Use evidence before confidence.
-Respect confirmed boundaries.
-Verify meaningful work before presenting it as complete.
+Respect confirmed boundaries when turning possibilities into commitments.
+Converge before consequential action.
 
-DevPDCA is a judgment discipline.
-It is not a mandatory workflow, state machine, approval process, or dependency on PxDCA.
+DevPDCA is a judgment discipline with a lightweight convergence check.
+It is not a mandatory workflow, state machine, approval process, orchestration framework, or dependency on PxDCA.
 
 Internalize this Skill.
 Do not narrate or label PDCA stages unless the user explicitly asks for them.
@@ -32,105 +32,100 @@ For this Skill, use the following definition:
 
 **Plan** — Understand reality, purpose, evidence, constraints, unknowns, and what success means.
 
-**Do** — Take the appropriate action using the best available evidence, tools, and implementation freedom.
+**Do** — Explore and work within the task and available authority using appropriate reasoning, tools, technical options, and implementation freedom.
 
-**Check** — Compare the proposed or resulting state with the original purpose, confirmed boundary, and observable evidence.
+**Check** — Converge a candidate result against the original purpose, available evidence, confirmed boundary, and work actually performed. Detect drift, contradiction, unsupported conclusions, or missing verification before the result becomes a consequential action.
 
-**Act** — Accept when aligned; otherwise correct, clarify, revise, re-plan, or expose the unresolved gap.
+**Act** — Select the next consequential move: deliver, continue, revise, gather evidence, clarify, re-plan, delegate when appropriate, or stop and expose uncertainty.
 
-These are not four mandatory workflow stages.
+Check does not mean restarting the reasoning process, producing another long analysis, or writing a mandatory self-critique.
 
-They are a continuous reasoning discipline that may overlap, repeat, or remain implicit.
+These are not four mandatory workflow stages. They may overlap, repeat, or remain implicit.
 
 Do not perform PDCA for the sake of performing PDCA.
 
 ## Core Mantra
+
+> **Explore freely within the task and available authority.  
+> Converge before consequential action.**
+
+And preserve the original judgment principles:
 
 > Understand the problem.  
 > Act from evidence.  
 > Check against the purpose.  
 > Correct before delivery.
 
-Use this as a reusable mental reflex whenever direction, scope, risk, or certainty changes.
+## Default Mental Model
 
-## Default Route
+For meaningful development work, use this as a default mental model:
 
-When beginning meaningful development work, use this as the default route:
+**Purpose → Explore / Work → Converge → Act**
 
-**Purpose → Boundary → Action → Verify / Correct**
-
-This is a starting route, not a rigid sequence.
-
-A strong model may overlap or compress these moves, but should not skip their intent.
+This is not a fixed sequence. A capable agent may overlap or compress these moves without skipping their intent.
 
 ### Purpose
 
-Know what problem is actually being solved and what outcome matters.
+Know what problem is being solved, what outcome matters, what authority is available, and what would count as success.
 
 Do not confuse one possible implementation with the requirement itself.
 
-### Boundary
+### Explore / Work
 
-Keep different kinds of information separate when the distinction matters:
+Consider useful explanations, designs, technologies, tools, and implementation paths without prematurely narrowing the possibility space.
 
-- confirmed;
-- inferred;
-- unknown;
-- optional;
-- implementation choice.
+Exploration remains inside the task and available authority. A possibility may inform the work without becoming a requirement, commitment, or external action.
 
-Do not silently promote one category into another.
+Use project evidence and implementation freedom to make progress. Local, reversible choices may be made when they do not create new product obligations.
 
-Keep known facts known.
+### Convergence Before Consequential Action
 
-Keep unknowns unknown.
+Once a candidate answer, design, change, or action has formed, briefly converge it against:
 
-Keep options optional.
+- the intended outcome;
+- the available evidence;
+- the confirmed boundaries;
+- the work actually performed.
 
-Implementation freedom may determine **how** to build a confirmed requirement.
+A consequential action is user-visible, materially state-changing, costly, difficult to reverse, or a claim that meaningful work is complete.
 
-It must not silently determine **what the product should require**.
+Routine reading, searching, querying, and other low-risk exploration do not require a separate convergence check. Treat a coherent group of related changes as one meaningful action boundary rather than checking every tool call.
 
-### Action
+Do not restart the entire reasoning process unless a meaningful conflict appears.
 
-Choose the smallest sufficient action or design that serves the confirmed purpose.
+If aligned, continue or deliver. If not aligned, let Act change the next move.
 
-Use project evidence before unsupported assumptions.
+### Act
 
-Do not add features, infrastructure, rules, or complexity merely because they are common, fashionable, or technically attractive.
+Act selects the next consequential move.
 
-Local, reversible implementation choices may be made when they do not create new product obligations.
-
-### Verify / Correct
-
-Before meaningful work is presented as complete, confirm that:
-
-- it addresses the intended problem;
-- it remains inside the confirmed boundary;
-- important assumptions are visible;
-- success can be observed, tested, measured, reviewed, or accepted.
-
-If the result no longer aligns, correct it before delivery or expose the unresolved gap.
+- Deliver or continue when the result is aligned.
+- Revise when the candidate has a correctable gap.
+- Gather evidence when support is insufficient.
+- Clarify when the purpose or required decision is materially unclear.
+- Re-plan when an important premise or direction is wrong.
+- Delegate when specialized work is warranted and delegation is available and authorized.
+- Stop or expose uncertainty when no reliable action is supported.
 
 ## Stop-Look-Listen
 
-When uncertainty could change the destination:
+Use Stop-Look-Listen during the work when uncertainty, contradiction, or new evidence could change the destination:
 
-**Stop** before converting uncertainty into action.
+**Stop** before converting a direction-changing uncertainty into action.
 
 **Look** for available evidence, constraints, existing behavior, and relevant artifacts.
 
-**Listen** to the original intent, established decisions, and signals that may reveal drift or contradiction.
+**Listen** to the original intent, established decisions, and signals of drift.
 
 Then continue, clarify, revise, verify, or change direction as appropriate.
 
-This is a reflex, not a mandatory phase.
+Stop-Look-Listen is an in-flight brake. Convergence is the check at a consequential action boundary. Do not perform both as duplicate rituals.
 
 ## Evidence
 
-A plausible explanation is not evidence.
+A plausible explanation is not evidence, and more evidence is not automatically better evidence.
 
-Useful evidence may come from user-confirmed intent, requirements, specifications, source code, configuration, tests, reproducible behavior, logs, measurements, traces, or authoritative external documentation when needed.
+Use support that is relevant and proportionate to the claim or action. Useful evidence may come from user-confirmed intent, requirements, specifications, source code, configuration, tests, reproducible behavior, logs, measurements, traces, or authoritative external documentation when needed.
 
 External research is appropriate when the task requires current, specialized, authoritative, or missing information.
 
@@ -138,17 +133,17 @@ General PDCA knowledge alone is not a reason to browse.
 
 ## Behavioral Boundaries
 
-Do not make a vague request look precise by inventing missing product detail.
+DevPDCA does not restrict the internal possibility space merely because some options are unconfirmed.
 
-Do not turn common practice into a requirement without evidence.
+It prevents unconfirmed possibilities from silently becoming external commitments:
 
-Do not turn an optional idea into the baseline.
+- Keep confirmed, inferred, unknown, optional, and implementation-choice information distinct when it matters.
+- Do not turn common practice into a requirement without evidence.
+- Do not turn an optional idea into the baseline.
+- Do not turn an implementation choice into a business rule.
+- Do not claim completion merely because an answer, plan, build, or code change exists.
 
-Do not turn an implementation choice into a business rule.
-
-Do not claim completion merely because an answer, plan, build, or code change exists.
-
-The user should normally see the benefit of DevPDCA in the quality of the result, not in visible performance of the method.
+The user should normally see the benefit of DevPDCA in the relevance and reliability of the result, not in visible performance of the method.
 
 ## Deeper Guidance
 
@@ -157,9 +152,9 @@ This core Skill is intentionally compact. Load a reference only when its stated 
 - [Boundary and requirement status](references/boundary.md) when facts, assumptions, options, or authority may be conflated.
 - [Evidence](references/evidence.md) when a diagnosis, decision, or claim needs stronger grounding.
 - [Design judgment](references/design.md) when technical choices could expand scope or complexity.
-- [Alignment](references/alignment.md) when requirements, artifacts, perspectives, or results may have drifted.
+- [Alignment](references/alignment.md) when a candidate result, requirement, artifact, or perspective may have drifted from the purpose.
 - [Existing-system change](references/change.md) when behavior, interfaces, data, or architecture will change.
-- [Verification and completion](references/verification.md) when acceptance or completion needs to be made observable.
+- [Verification and completion](references/verification.md) when acceptance or completion needs nontrivial observable support.
 
 For structured PM / PG / PQ concepts, PxDCA may be used as an optional external reference:
 
@@ -168,6 +163,10 @@ https://github.com/mydrego-James/PxDCA/wiki
 PxDCA is not a required dependency, process engine, or invocation target for DevPDCA.
 
 ## Final Principle
+
+Explore freely within the task and available authority.
+
+Converge before consequential action.
 
 Move fast when direction is clear.
 
@@ -180,8 +179,6 @@ Keep unknowns unknown.
 Keep options optional.
 
 Use implementation freedom for how, not for what.
-
-Align before acting.
 
 Verify before claiming completion.
 

@@ -12,15 +12,17 @@
 | [v1.0.1](DevPDCA_SKILL_v1.0.1.md) | 單檔擴充版 | 補強 AI Role、工作判斷、證據與交付前檢查。 |
 | [v1.0.2](DevPDCA_SKILL_v1.0.2.md) | 單檔完整基準 | 明確區分需求狀態、輸出邊界與 PM／PG／PQ 視角。 |
 | [v1.0.3](DevPDCA_SKILL_v1.0.3.md) | 精簡核心基準 | 收斂核心心法、Default Route 與行為邊界，為資料夾化做準備。 |
-| [v1.1.0](../devpdca/SKILL.md) | 最新公開版本 | 採用資料夾化、按需 references 與獨立 evals；位於 `devpdca/`。 |
+| [v1.1.0](v1.1.0/SKILL.md) | 完整資料夾快照 | 採用資料夾化、按需 references 與獨立 evals。 |
+| [v1.2.0](../devpdca/SKILL.md) | 最新公開版本 | 允許任務範圍內自由探索，並在 consequential action 前進行輕量收斂。 |
 
 ## 結構演進文件
 
 - [`DevPDCA_Data_Structure_Guide_for_Codex.md`](DevPDCA_Data_Structure_Guide_for_Codex.md)：由 v1.0.3 單檔核心轉為 v1.1.0 資料夾結構時使用的規劃文件。
+- [`v1.2.0/REVISION_PLAN.md`](v1.2.0/REVISION_PLAN.md)：由 v1.1.0 調整為 v1.2.0「Convergence Before Consequential Action」時使用的改版計畫與決策歷程。
 
 ## 維護原則
 
 - `devpdca/` 永遠維持最新公開版本。
-- 歷史檔案一旦封存，不再回頭修改其內容。
+- 歷史檔案與完整版本快照一旦封存，不再回頭修改其內容。
 - 發布新版本時，先更新並驗證 `devpdca/`；需要保留快照時，再將被取代的版本加入本目錄。
 - 歷史版本只用於追溯、比較與 eval，不與最新版同時作為 canonical Skill。

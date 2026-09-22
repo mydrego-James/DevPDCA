@@ -1,6 +1,8 @@
 # DevPDCA
 
-DevPDCA 是一套供 AI 開發代理使用的獨立判斷 Skill，將 Plan-Do-Check-Act（PDCA）的精神融入需求理解、技術規劃、實作、檢查與修正，讓開發工作持續對準真正的問題、可用證據、已確認邊界與可驗證結果。
+DevPDCA 是一套供 AI 開發代理使用、帶有輕量收斂檢查的獨立開發判斷 Skill。它將 Plan-Do-Check-Act（PDCA）的精神融入需求理解、技術規劃、實作、檢查與修正，讓開發工作持續對準真正的問題、可用證據、已確認邊界與可驗證結果。
+
+DevPDCA 不會壓縮 Agent 在任務與既有授權內的探索能力；它在推理即將成為重要行動或交付以前，加入一次低成本的目的收斂。
 
 它不是固定流程、專案管理框架或多 Agent 編排系統。DevPDCA 的目的，是提升 AI 在開發工作中的判斷品質，而不是要求所有任務依序展示 PDCA 步驟。
 
@@ -22,11 +24,14 @@ DevPDCA 適用於 AI 協助進行的開發工作，包括：
 ## PDCA 的使用方式
 
 - **Plan**：理解現況、目的、證據、限制、未知事項與成功條件。
-- **Do**：依據現有證據與已確認邊界採取適當行動。
-- **Check**：將計畫或結果與原始目的、需求邊界及可觀察證據比較。
-- **Act**：結果一致時接受；不一致時修正、釐清、重新規劃或揭露缺口。
+- **Do**：在任務與既有授權內自由探索，使用適當的推理、工具與實作方法。
+- **Check**：在候選結果產生實質影響前，將它與原始目的、可用證據、確認邊界及實際完成的工作快速收斂。
+- **Act**：選擇下一個實質動作，例如交付、繼續、修正、補證據、釐清、重新規劃、適當委派或停止。
 
 四者是可重疊、反覆且通常保持隱性的判斷紀律，不是必須逐項執行的固定階段。
+
+> **Explore freely within the task and available authority.  
+> Converge before consequential action.**
 
 > Understand the problem.  
 > Act from evidence.  
@@ -38,6 +43,7 @@ DevPDCA 適用於 AI 協助進行的開發工作，包括：
 DevPDCA 不會：
 
 - 將推論、慣例或技術偏好自動升格為產品需求；
+- 因為候選方案尚未確認，就禁止 Agent 思考或比較它；
 - 為了看似完整而補造尚未決定的產品行為；
 - 預設特定架構、雲端服務、基礎設施或工具鏈；
 - 取代專案本身的需求權威、領域知識、測試或驗收責任；
@@ -70,9 +76,13 @@ DevPDCA/
 │  │  ├─ change.md
 │  │  └─ verification.md
 │  └─ evals/
-│     └─ README.md
+│     ├─ README.md
+│     └─ cases/
 └─ development-history/     # 開發變更與歷史版本
    ├─ README.md
+   ├─ v1.1.0/               # 完整版本快照
+   ├─ v1.2.0/
+   │  └─ REVISION_PLAN.md
    ├─ DevPDCA_SKILL_v1.0.0.md
    ├─ DevPDCA_SKILL_v1.0.1.md
    ├─ DevPDCA_SKILL_v1.0.2.md
@@ -85,7 +95,7 @@ DevPDCA/
 - `devpdca/evals/`：評估 DevPDCA 是否實際改善模型行為的測試規格。
 - `development-history/`：已封存的舊版與結構演進紀錄。
 
-目前最新公開版本為 DevPDCA v1.1.0；其核心以 v1.0.3 為基準，並正式採用資料夾化與 Progressive Disclosure。
+目前最新公開版本為 DevPDCA v1.2.0，主題為 **Convergence Before Consequential Action**。
 
 ## 核心原則
 

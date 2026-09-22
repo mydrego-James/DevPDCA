@@ -8,7 +8,7 @@ Do not read it when the claim is low-risk and already directly supported by the 
 
 ## Core idea
 
-A plausible explanation is not evidence. Convergence should use support that is relevant and sufficient for the claim or action; collecting more information is not a goal by itself.
+A plausible explanation is not evidence. Confidence should be proportional to the quality and relevance of observable support.
 
 ## Signals
 
@@ -30,16 +30,15 @@ Choose evidence that can actually support the claim. Depending on the question, 
 - logs, measurements, traces, or query plans;
 - authoritative external documentation when current or missing facts require it.
 
-Prefer direct project evidence over analogy. Record important limitations when evidence is partial or conflicting. Seek stronger evidence when a wrong conclusion would materially change scope, design, safety, compatibility, or delivery. Stop gathering when the available evidence is proportionate to the decision and additional information is unlikely to change it.
+Prefer direct project evidence over analogy. Record important limitations when evidence is partial or conflicting. Seek stronger evidence when a wrong conclusion would materially change scope, design, safety, compatibility, or delivery.
 
 ## Avoid
 
 - Replacing missing evidence with fluent explanation.
 - Using an unrelated passing check as proof of the requested behavior.
 - Browsing for generic PDCA theory when the task does not need external facts.
-- Collecting evidence without a clear claim or decision it could change.
 - Demanding heavyweight proof for a small, reversible decision.
 
 ## Return to core
 
-Use the evidence to converge the candidate result against purpose, boundary, and what can honestly be claimed or done next.
+Use the evidence to reassess purpose, boundary, and whether the result can honestly be called complete.

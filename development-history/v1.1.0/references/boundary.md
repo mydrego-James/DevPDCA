@@ -8,7 +8,7 @@ Do not read it for a small task whose purpose, scope, and authority are already 
 
 ## Core idea
 
-Explore useful possibilities without collapsing their status. Boundary discipline governs what may become an external commitment, not what the agent is allowed to consider.
+Preserve the status of information. A useful plan can remain incomplete where the product decision is genuinely incomplete.
 
 - **Confirmed** — explicitly stated by the user, established by project evidence, or accepted by the relevant authority.
 - **Inferred** — a reasonable interpretation that may guide provisional work but is not yet a requirement.
@@ -29,14 +29,13 @@ Implementation freedom determines **how**, not **what** the product must require
 
 ## Guidance
 
-During exploration, consider alternatives as broadly as the task warrants. Before a result becomes user-visible or materially state-changing, use confirmed items as the baseline, mark material inference as provisional, keep unresolved product behavior unresolved, and separate optional extensions from required work.
+Use confirmed items as the baseline. Mark material inference as provisional, keep unresolved product behavior unresolved, and separate optional extensions from required work.
 
 Make local, reversible implementation choices when the surrounding boundary is clear and the choice does not impose a new contract. Ask or expose the gap when uncertainty could change the destination, acceptance criteria, data contract, or user-visible behavior.
 
 ## Avoid
 
 - Inventing precision to make a plan feel complete.
-- Treating the existence of an idea as permission to commit to it.
 - Treating popularity, convention, or personal preference as authority.
 - Turning alternatives into commitments before a decision is needed.
 - Presenting every low-risk technical detail as a product question.

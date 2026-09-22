@@ -8,7 +8,7 @@ Do not read it for routine, local, reversible implementation details within a cl
 
 ## Core idea
 
-Explore technical options as broadly as useful, then commit only to the smallest sufficient design that serves the confirmed purpose, fits the existing system, and preserves implementation freedom where possible.
+Technical design serves the confirmed purpose. Choose the smallest sufficient design that fits the existing system and preserves implementation freedom where possible.
 
 ## Signals
 
@@ -21,14 +21,13 @@ Explore technical options as broadly as useful, then commit only to the smallest
 
 ## Guidance
 
-Start from the outcome and constraints. Consider multiple technical responses when that improves the decision, then converge on a proportionate design before it becomes a commitment. Understand the surrounding contract before replacing existing behavior. Prefer choices that are reversible when evidence is weak and expose decisions that would create lasting product or operational obligations.
+Start from the outcome and constraints, then choose a proportionate technical response. Understand the surrounding contract before replacing existing behavior. Prefer choices that are reversible when evidence is weak and expose decisions that would create lasting product or operational obligations.
 
 Complexity is justified by a confirmed need, observed constraint, or measurable tradeoff—not by familiarity, popularity, or theoretical cleanliness. REST, microservices, Redis, Kubernetes, cloud deployment, and containers are options, not universal baselines.
 
 ## Avoid
 
 - Architecture by trend or habit.
-- Suppressing useful alternatives merely because they are not yet selected.
 - Converting a technical preference into a product requirement.
 - Designing for unconfirmed scale, availability, security, or integration needs.
 - Optimizing elegance while losing the intended outcome.
