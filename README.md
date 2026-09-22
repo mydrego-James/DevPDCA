@@ -1,5 +1,7 @@
 # DevPDCA
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 DevPDCA 是一套供 AI 開發代理使用、帶有輕量收斂檢查的獨立開發判斷 Skill。它將 Plan-Do-Check-Act（PDCA）的精神融入需求理解、技術規劃、實作、檢查與修正，讓開發工作持續對準真正的問題、可用證據、已確認邊界與可驗證結果。
 
 DevPDCA 不會壓縮 Agent 在任務與既有授權內的探索能力；它在推理即將成為重要行動或交付以前，加入一次低成本的目的收斂。
@@ -100,3 +102,9 @@ DevPDCA/
 ## 核心原則
 
 Keep known facts known. Keep unknowns unknown. Keep options optional. Use implementation freedom for how, not for what. Verify before claiming completion.
+
+## 授權與公開範圍
+
+本儲存庫中實際公開的 Skill、參考指引、評估案例與文件依 [Apache License 2.0](LICENSE) 授權。任何人都可以在遵守授權條款的前提下使用、修改、Fork、散布及商業使用，也歡迎提出意見、修正或共同參與開發。刻意提交給本專案的貢獻，除另有書面約定外，依相同授權提供。
+
+這項開源授權只涵蓋本儲存庫中實際公開的內容。未公開的客戶資料、企業專屬 Skill 或 Prompt、客製模板、內部流程、營業秘密、專利技術及個別契約交付成果，不屬於本儲存庫或其開源授權範圍，另依雙方合約、保密協議與個別授權條款管理。
