@@ -1,0 +1,17 @@
+{
+  "name": "devpdca",
+  "displayName": "DevPDCA",
+  "version": "1.2.0",
+  "description": "A standalone development judgment skill for AI agents with a lightweight convergence check.",
+  "author": {
+    "name": "mydrego-James"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "pdca",
+    "judgment",
+    "convergence",
+    "verification",
+    "software-engineering"
+  ]
+}

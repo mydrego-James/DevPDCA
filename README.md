@@ -1,6 +1,8 @@
 # DevPDCA
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Antigravity](https://img.shields.io/badge/Antigravity-Skill%20%26%20Plugin-green.svg)](https://github.com/mydrego-James/DevPDCA)
+[![Version](https://img.shields.io/badge/Version-1.2.0-orange.svg)](devpdca/SKILL.md)
 
 DevPDCA 是一套供 AI 開發代理使用、帶有輕量收斂檢查的獨立開發判斷 Skill。它將 Plan-Do-Check-Act（PDCA）的精神融入需求理解、技術規劃、實作、檢查與修正，讓開發工作持續對準真正的問題、可用證據、已確認邊界與可驗證結果。
 
@@ -54,9 +56,68 @@ DevPDCA 不會：
 
 PxDCA 可作為更深入的 PM／PG／PQ、對齊與追溯概念參考，但不是 DevPDCA 的必要依賴。
 
-## 使用
+---
 
-讓支援 `SKILL.md` 的 AI Agent 載入 [`devpdca/`](devpdca/) 目錄即可。核心判斷原則位於 [`devpdca/SKILL.md`](devpdca/SKILL.md)；較深入的工程判斷會依任務需要，從 [`devpdca/references/`](devpdca/references/) 按需載入。
+## 🚀 快速安裝與使用 (Installation & Quick Start)
+
+DevPDCA 原生支援作為 **Google Antigravity** 的全域外掛與專案技能，亦可作為判斷原則導入其他 AI 開發輔助工具。
+
+### 1. Google Antigravity
+
+#### 方案 A：全域安裝（推薦，所有專案皆自動啟用）
+在終端機執行對應系統的一鍵安裝指令：
+
+* **Windows (PowerShell)**：
+  ```powershell
+  irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1 | iex
+  ```
+
+* **macOS / Linux (Bash)**：
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.sh | bash
+  ```
+
+安裝腳本會自動完成：
+1. 下載最新版 DevPDCA（含 `SKILL.md` 與 `references/` 深度指引庫）。
+2. 部署至 `~/.gemini/config/plugins/devpdca/` 並配置 `plugin.json`。
+3. 建立 `~/.gemini/config/skills/devpdca/` 符號連結（Junction）確保雙路徑相容性。
+4. 自動呼叫 `agy plugin validate` 驗證外掛安裝。
+
+#### 方案 B：單一專案安裝（僅當前專案生效）
+若希望將 DevPDCA 納入 Git 專案版本控制與團隊共用：
+
+* **Windows (PowerShell)**：
+  ```powershell
+  irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1 | iex -Scope project
+  ```
+* **macOS / Linux (Bash)**：
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.sh | bash -s -- --project
+  ```
+* **手動複製**：
+  直接將本倉庫的 [`devpdca/`](devpdca/) 目錄複製到您專案的 `.agent/skills/devpdca/` 即可。
+
+#### 驗證安裝
+安裝後可執行以下指令確認 Antigravity 正確載入：
+```bash
+agy plugin validate ~/.gemini/config/plugins/devpdca
+```
+若輸出 `✔ skills : 1 processed` 即代表安裝完成。
+
+---
+
+### 2. 其他 AI 輔助開發工具（Claude Code / Cursor / Windsurf 等）
+
+DevPDCA 的判斷原則具有跨工具的普適性：
+
+| 工具 | 整合方式 |
+| :--- | :--- |
+| **Claude Code** | 將 [`devpdca/SKILL.md`](devpdca/SKILL.md) 內容複製至 `~/.claude/skills/devpdca.md` 或全域 Prompt。 |
+| **Cursor** | 將核心原則加入專案根目錄的 `.cursorrules`，或在 Cursor 設定的 *Rules for AI* 中引用。 |
+| **Windsurf** | 將核心原則加入專案根目錄的 `.windsurfrules`。 |
+| **GitHub Copilot** | 加入專案根目錄 `.github/copilot-instructions.md`。 |
+
+---
 
 ## 版本治理
 
@@ -68,34 +129,32 @@ PxDCA 可作為更深入的 PM／PG／PQ、對齊與追溯概念參考，但不�
 
 ```text
 DevPDCA/
-├─ devpdca/                 # 最新公開版本
-│  ├─ SKILL.md
-│  ├─ references/
-│  │  ├─ boundary.md
-│  │  ├─ evidence.md
-│  │  ├─ design.md
-│  │  ├─ alignment.md
-│  │  ├─ change.md
-│  │  └─ verification.md
-│  └─ evals/
-│     ├─ README.md
-│     └─ cases/
-└─ development-history/     # 開發變更與歷史版本
-   ├─ README.md
-   ├─ v1.1.0/               # 完整版本快照
-   ├─ v1.2.0/
-   │  └─ REVISION_PLAN.md
-   ├─ DevPDCA_SKILL_v1.0.0.md
-   ├─ DevPDCA_SKILL_v1.0.1.md
-   ├─ DevPDCA_SKILL_v1.0.2.md
-   ├─ DevPDCA_SKILL_v1.0.3.md
-   └─ DevPDCA_Data_Structure_Guide_for_Codex.md
+├── plugin.json               # Antigravity 外掛配置 Manifest
+├── install.ps1               # Windows PowerShell 一鍵安裝腳本
+├── install.sh                # macOS / Linux Bash 一鍵安裝腳本
+├── devpdca/                  # 最新公開版本
+│   ├── SKILL.md              # 核心判斷原則與 reference 路由
+│   ├── references/           # 只在特定情境需要時載入的深入指引
+│   │   ├── boundary.md       # 邊界與需求狀態（區分 Confirmed/Inferred/Unknown）
+│   │   ├── evidence.md       # 證據原則
+│   │   ├── design.md         # 設計決策與複雜度控制
+│   │   ├── alignment.md      # 目的對齊與防偏離
+│   │   ├── change.md         # 既有系統變更與向後相容
+│   │   └── verification.md   # 驗證與完工標準
+│   └── evals/                # 評估 DevPDCA 是否實際改善模型行為的測試規格
+│       ├── README.md
+│       └── cases/
+└── development-history/      # 開發變更與歷史版本
+    ├── README.md
+    ├── v1.1.0/               # 完整版本快照
+    ├── v1.2.0/
+    │   └── REVISION_PLAN.md
+    ├── DevPDCA_SKILL_v1.0.0.md
+    ├── DevPDCA_SKILL_v1.0.1.md
+    ├── DevPDCA_SKILL_v1.0.2.md
+    ├── DevPDCA_SKILL_v1.0.3.md
+    └── DevPDCA_Data_Structure_Guide_for_Codex.md
 ```
-
-- `devpdca/SKILL.md`：最新的核心判斷原則與 reference 路由。
-- `devpdca/references/`：只在特定情境需要時載入的深入指引。
-- `devpdca/evals/`：評估 DevPDCA 是否實際改善模型行為的測試規格。
-- `development-history/`：已封存的舊版與結構演進紀錄。
 
 目前最新公開版本為 DevPDCA v1.2.0，主題為 **Convergence Before Consequential Action**。
 
