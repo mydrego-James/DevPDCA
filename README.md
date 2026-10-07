@@ -88,14 +88,17 @@ DevPDCA 原生支援作為 **Google Antigravity** 的全域外掛與專案技能
 
 * **Windows (PowerShell)**：
   ```powershell
-  irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1 | iex -Scope project
+  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1))) -Scope project
   ```
+  *(亦可使用 `$env:DEVPDCA_SCOPE='project'; irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1 | iex`)*
 * **macOS / Linux (Bash)**：
   ```bash
   curl -fsSL https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.sh | bash -s -- --project
   ```
-* **手動複製**：
-  直接將本倉庫的 [`devpdca/`](devpdca/) 目錄複製到您專案的 `.agent/skills/devpdca/` 即可。
+* **本機執行 / 手動複製**：
+  - 本機 PowerShell：`.\install.ps1 -Scope project`
+  - 本機 Bash：`./install.sh --project`
+  - 手動複製：直接將本倉庫的 [`devpdca/`](devpdca/) 目錄複製到您專案的 `.agent/skills/devpdca/` 即可。
 
 #### 驗證安裝
 安裝後可執行以下指令確認 Antigravity 正確載入：

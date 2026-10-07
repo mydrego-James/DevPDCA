@@ -1,0 +1,14 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Explicitly ensure shell scripts use LF line endings and no BOM
+*.sh text eol=lf
+
+# PowerShell scripts (CRLF on Windows, LF on Linux)
+*.ps1 text
+
+# Markdown documentation
+*.md text eol=lf
+
+# JSON files
+*.json text eol=lf

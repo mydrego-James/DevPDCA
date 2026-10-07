@@ -1,0 +1,9 @@
+# Antigravity local project skill directory
+.agent/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*~
