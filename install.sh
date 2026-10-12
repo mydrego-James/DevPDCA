@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# DevPDCA Installer for Google Antigravity & Agentic Coding Assistants
+# DevPDCA Installer for Google Antigravity & Agentic Coding Assistants (v1.3.0)
 # Supports macOS and Linux (Debian, Ubuntu, Alpine, Fedora, CentOS, Arch, etc.)
+#
+# Installs Dual-Layer Architecture:
+#   - Layer 1 (Always-On Core Rule): rules/AGENTS.md
+#   - Layer 2 (Deep Judgment Skill): skills/devpdca
 #
 # Usage:
 #   # Remote one-liner (Global):
@@ -42,7 +46,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo "============================================="
-echo "   [+] DevPDCA Installer (v1.2.0)"
+echo "   [+] DevPDCA Installer (v1.3.0)"
+echo "   [i] Always-On Core Rule + Judgment Skill"
 echo "============================================="
 
 # Function to remove UTF-8 BOM if present (POSIX compatible)
@@ -74,6 +79,7 @@ trap cleanup EXIT INT TERM
 if [[ -n "$SCRIPT_DIR" && -f "$SCRIPT_DIR/devpdca/SKILL.md" ]]; then
   echo "[-] Detected local repository at: $SCRIPT_DIR"
   SOURCE_DIR="$SCRIPT_DIR/devpdca"
+  LOCAL_RULES_DIR="$SCRIPT_DIR/rules"
   LOCAL_PLUGIN_JSON="$SCRIPT_DIR/plugin.json"
 else
   echo "[+] Fetching latest DevPDCA from GitHub ($REPO_OWNER/$REPO_NAME)..."
@@ -111,6 +117,7 @@ else
   fi
 
   SOURCE_DIR="$TEMP_DIR/$REPO_NAME-$BRANCH/devpdca"
+  LOCAL_RULES_DIR="$TEMP_DIR/$REPO_NAME-$BRANCH/rules"
   LOCAL_PLUGIN_JSON="$TEMP_DIR/$REPO_NAME-$BRANCH/plugin.json"
 fi
 
@@ -124,13 +131,23 @@ if [[ "$SCOPE" == "global" ]]; then
   USER_HOME="${HOME:-$(eval echo ~${USER:-})}"
   GEMINI_CONFIG="$USER_HOME/.gemini/config"
   PLUGIN_DIR="$GEMINI_CONFIG/plugins/devpdca"
+  RULES_DIR="$PLUGIN_DIR/rules"
   SKILL_DIR="$PLUGIN_DIR/skills/devpdca"
   GLOBAL_SKILLS="$GEMINI_CONFIG/skills/devpdca"
 
   echo "[+] Installing DevPDCA to Global Plugin directory:"
   echo "    -> $PLUGIN_DIR"
 
+  mkdir -p "$RULES_DIR"
   mkdir -p "$SKILL_DIR"
+
+  # Layer 1: Always-On Core Rule (rules/AGENTS.md)
+  if [[ -f "$LOCAL_RULES_DIR/AGENTS.md" ]]; then
+    cp "$LOCAL_RULES_DIR/AGENTS.md" "$RULES_DIR/AGENTS.md"
+    strip_bom "$RULES_DIR/AGENTS.md"
+  fi
+
+  # Layer 2: Deep Judgment Skill
   cp -R "$SOURCE_DIR/." "$SKILL_DIR/"
 
   # plugin.json (guaranteed UTF-8 without BOM)
@@ -142,8 +159,8 @@ if [[ "$SCOPE" == "global" ]]; then
 {
   "name": "devpdca",
   "displayName": "DevPDCA",
-  "version": "1.2.0",
-  "description": "A standalone development judgment skill for AI agents with a lightweight convergence check.",
+  "version": "1.3.0",
+  "description": "The core behavioral judgment layer for AI agents: enforces an always-on mindset core and a continuous five-move judgment process between the Agent Core and Domain Skills.",
   "author": {
     "name": "mydrego-James"
   },
@@ -151,8 +168,9 @@ if [[ "$SCOPE" == "global" ]]; then
   "keywords": [
     "pdca",
     "judgment",
-    "convergence",
-    "verification",
+    "core-behavior",
+    "direction-stability",
+    "context-preservation",
     "software-engineering"
   ]
 }
@@ -167,14 +185,14 @@ EOF
   if [[ -L "$GLOBAL_SKILLS" ]]; then
     ln -sfn "$SKILL_DIR" "$GLOBAL_SKILLS"
   elif [[ -d "$GLOBAL_SKILLS" ]]; then
-    # Directory already exists from older install; replace with symlink or sync
     rm -rf "$GLOBAL_SKILLS"
     ln -sf "$SKILL_DIR" "$GLOBAL_SKILLS" || cp -R "$SKILL_DIR/." "$GLOBAL_SKILLS/"
   else
     ln -sf "$SKILL_DIR" "$GLOBAL_SKILLS"
   fi
 
-  echo "    [OK] Files deployed successfully."
+  echo "    [OK] Layer 1 Always-On Core Rule deployed: $RULES_DIR/AGENTS.md"
+  echo "    [OK] Layer 2 Deep Judgment Skill deployed: $SKILL_DIR"
 
   if command -v agy >/dev/null 2>&1; then
     echo "[+] Validating plugin with Antigravity CLI (agy)..."
@@ -183,18 +201,28 @@ EOF
 
 else
   CURRENT_DIR="$(pwd -P)"
+  PROJECT_RULES_DIR="$CURRENT_DIR/.agent/rules"
   PROJECT_SKILL_DIR="$CURRENT_DIR/.agent/skills/devpdca"
   echo "[+] Installing DevPDCA to project workspace:"
-  echo "    -> $PROJECT_SKILL_DIR"
+  echo "    -> $PROJECT_RULES_DIR (Always-On Core Rule)"
+  echo "    -> $PROJECT_SKILL_DIR (Deep Judgment Skill)"
 
+  mkdir -p "$PROJECT_RULES_DIR"
   mkdir -p "$PROJECT_SKILL_DIR"
+
+  if [[ -f "$LOCAL_RULES_DIR/AGENTS.md" ]]; then
+    cp "$LOCAL_RULES_DIR/AGENTS.md" "$PROJECT_RULES_DIR/devpdca.md"
+    strip_bom "$PROJECT_RULES_DIR/devpdca.md"
+  fi
+
   cp -R "$SOURCE_DIR/." "$PROJECT_SKILL_DIR/"
   strip_bom "$PROJECT_SKILL_DIR/SKILL.md"
 
-  echo "    [OK] Project skill installed successfully."
+  echo "    [OK] Project rule & skill installed successfully."
 fi
 
 echo ""
-echo "[OK] DevPDCA Installation Complete!"
-echo "[i] The skill will now guide your agent with 'Convergence Before Consequential Action'."
+echo "[OK] DevPDCA v1.3.0 Installation Complete!"
+echo "[i] Layer 1 (Always-On Mindset Core) + Layer 2 (Judgment Skill) are now active."
+echo "[i] Note: The v1.3.0 Always-On Core architecture welcomes user testing and feedback."
 echo "============================================="

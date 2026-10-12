@@ -1,12 +1,13 @@
 <#
 .SYNOPSIS
-    DevPDCA Installer for Google Antigravity & Agentic Coding Assistants.
+    DevPDCA Installer for Google Antigravity & Agentic Coding Assistants (v1.3.0).
 .DESCRIPTION
-    Installs the DevPDCA Skill into the global Antigravity environment (~/.gemini/config/plugins/devpdca)
-    or into the current workspace (.agent/skills/devpdca).
+    Installs DevPDCA as a Dual-Layer Architecture:
+    - Layer 1 (Always-On Core Rule): rules/AGENTS.md (governs every turn below Agent Core)
+    - Layer 2 (Deep Judgment Skill): skills/devpdca (SKILL.md, references/, evals/)
 .PARAMETER Scope
-    'global' (default) installs for all projects on this machine.
-    'project' installs into the current workspace (.agent/skills/devpdca).
+    'global' (default) installs into ~/.gemini/config/plugins/devpdca for all projects.
+    'project' installs into the current workspace (.agent/rules and .agent/skills/devpdca).
 .EXAMPLE
     # One-liner remote installation (Global):
     irm https://raw.githubusercontent.com/mydrego-James/DevPDCA/main/install.ps1 | iex
@@ -62,11 +63,13 @@ $repoName  = "DevPDCA"
 $branch    = "main"
 
 Write-Host "=============================================" -ForegroundColor Cyan
-Write-Host "   [+] DevPDCA Installer (v1.2.0)            " -ForegroundColor Cyan
+Write-Host "   [+] DevPDCA Installer (v1.3.0)            " -ForegroundColor Cyan
+Write-Host "   [i] Always-On Core Rule + Judgment Skill  " -ForegroundColor Cyan
 Write-Host "=============================================" -ForegroundColor Cyan
 
 # 1. Determine Source (Local repository or Remote GitHub)
 $sourceDir = $null
+$localRulesDir = $null
 $localPluginJson = $null
 $tempExtractDir = $null
 $tempZip = $null
@@ -75,6 +78,7 @@ try {
     if ($PSScriptRoot -and (Test-Path -LiteralPath (Join-Path $PSScriptRoot "devpdca\SKILL.md"))) {
         Write-Host "[-] Detected local repository at: $PSScriptRoot" -ForegroundColor Gray
         $sourceDir = Join-Path $PSScriptRoot "devpdca"
+        $localRulesDir = Join-Path $PSScriptRoot "rules"
         $localPluginJson = Join-Path $PSScriptRoot "plugin.json"
     } else {
         Write-Host "[+] Fetching latest DevPDCA from GitHub ($repoOwner/$repoName)..." -ForegroundColor Yellow
@@ -92,6 +96,7 @@ try {
         # Extract archive
         Expand-Archive -LiteralPath $tempZip -DestinationPath $tempExtractDir -Force
         $sourceDir = Join-Path $tempExtractDir "$repoName-$branch\devpdca"
+        $localRulesDir = Join-Path $tempExtractDir "$repoName-$branch\rules"
         $localPluginJson = Join-Path $tempExtractDir "$repoName-$branch\plugin.json"
     }
 
@@ -108,6 +113,7 @@ try {
         $userProfile = if ($env:USERPROFILE) { $env:USERPROFILE } elseif ($HOME) { $HOME } else { [Environment]::GetFolderPath('UserProfile') }
         $geminiConfig = Join-Path $userProfile ".gemini\config"
         $pluginDir    = Join-Path $geminiConfig "plugins\devpdca"
+        $rulesDir     = Join-Path $pluginDir "rules"
         $skillDir     = Join-Path $pluginDir "skills\devpdca"
         $globalSkills = Join-Path $geminiConfig "skills\devpdca"
 
@@ -115,11 +121,22 @@ try {
         Write-Host "    -> $pluginDir" -ForegroundColor Gray
 
         # Create target directories
+        if (-not (Test-Path -LiteralPath $rulesDir)) {
+            New-Item -ItemType Directory -Force -Path $rulesDir | Out-Null
+        }
         if (-not (Test-Path -LiteralPath $skillDir)) {
             New-Item -ItemType Directory -Force -Path $skillDir | Out-Null
         }
 
-        # Copy skill contents (SKILL.md, references, evals) with LiteralPath safety
+        # Copy Layer 1: Always-On Core Rule (rules/AGENTS.md)
+        $localAgentsMd = if ($localRulesDir) { Join-Path $localRulesDir "AGENTS.md" } else { $null }
+        $targetAgentsMd = Join-Path $rulesDir "AGENTS.md"
+        if ($localAgentsMd -and (Test-Path -LiteralPath $localAgentsMd)) {
+            Copy-Item -LiteralPath $localAgentsMd -Destination $targetAgentsMd -Force
+            Remove-Utf8Bom -FilePath $targetAgentsMd
+        }
+
+        # Copy Layer 2: Skill contents (SKILL.md, references, evals) with LiteralPath safety
         Get-ChildItem -LiteralPath $sourceDir | ForEach-Object {
             Copy-Item -LiteralPath $_.FullName -Destination $skillDir -Recurse -Force
         }
@@ -134,8 +151,8 @@ try {
 {
   "name": "devpdca",
   "displayName": "DevPDCA",
-  "version": "1.2.0",
-  "description": "A standalone development judgment skill for AI agents with a lightweight convergence check.",
+  "version": "1.3.0",
+  "description": "The core behavioral judgment layer for AI agents: enforces an always-on mindset core and a continuous five-move judgment process between the Agent Core and Domain Skills.",
   "author": {
     "name": "mydrego-James"
   },
@@ -143,8 +160,9 @@ try {
   "keywords": [
     "pdca",
     "judgment",
-    "convergence",
-    "verification",
+    "core-behavior",
+    "direction-stability",
+    "context-preservation",
     "software-engineering"
   ]
 }
@@ -196,7 +214,8 @@ try {
             }
         }
 
-        Write-Host "    [OK] Files deployed successfully." -ForegroundColor Green
+        Write-Host "    [OK] Layer 1 Always-On Core Rule deployed: $targetAgentsMd" -ForegroundColor Green
+        Write-Host "    [OK] Layer 2 Deep Judgment Skill deployed: $skillDir" -ForegroundColor Green
 
         # Validate with agy CLI if available
         $agyCmd = Get-Command "agy" -ErrorAction SilentlyContinue
@@ -213,15 +232,29 @@ try {
     } else {
         # Project Scope: Current working directory
         $cwd = (Get-Location).ProviderPath
+        $projectRulesDir = Join-Path $cwd ".agent\rules"
         $projectSkillDir = Join-Path $cwd ".agent\skills\devpdca"
 
         Write-Host "[+] Installing DevPDCA to Project directory:" -ForegroundColor Cyan
-        Write-Host "    -> $projectSkillDir" -ForegroundColor Gray
+        Write-Host "    -> $projectRulesDir (Always-On Core Rule)" -ForegroundColor Gray
+        Write-Host "    -> $projectSkillDir (Deep Judgment Skill)" -ForegroundColor Gray
 
+        if (-not (Test-Path -LiteralPath $projectRulesDir)) {
+            New-Item -ItemType Directory -Force -Path $projectRulesDir | Out-Null
+        }
         if (-not (Test-Path -LiteralPath $projectSkillDir)) {
             New-Item -ItemType Directory -Force -Path $projectSkillDir | Out-Null
         }
 
+        # Copy Layer 1 Always-On Core Rule
+        $localAgentsMd = if ($localRulesDir) { Join-Path $localRulesDir "AGENTS.md" } else { $null }
+        $targetProjectRule = Join-Path $projectRulesDir "devpdca.md"
+        if ($localAgentsMd -and (Test-Path -LiteralPath $localAgentsMd)) {
+            Copy-Item -LiteralPath $localAgentsMd -Destination $targetProjectRule -Force
+            Remove-Utf8Bom -FilePath $targetProjectRule
+        }
+
+        # Copy Layer 2 Skill
         Get-ChildItem -LiteralPath $sourceDir | ForEach-Object {
             Copy-Item -LiteralPath $_.FullName -Destination $projectSkillDir -Recurse -Force
         }
@@ -229,7 +262,7 @@ try {
         # Sanitize BOM on target files
         Remove-Utf8Bom -FilePath (Join-Path $projectSkillDir "SKILL.md")
 
-        Write-Host "    [OK] Project skill installed at: $projectSkillDir" -ForegroundColor Green
+        Write-Host "    [OK] Project rule & skill installed successfully." -ForegroundColor Green
     }
 
 } finally {
@@ -242,6 +275,7 @@ try {
     }
 }
 
-Write-Host "`n[OK] DevPDCA Installation Complete!" -ForegroundColor Green
-Write-Host "[i] The skill will now automatically guide your agent with 'Convergence Before Consequential Action'." -ForegroundColor Cyan
+Write-Host "`n[OK] DevPDCA v1.3.0 Installation Complete!" -ForegroundColor Green
+Write-Host "[i] Layer 1 (Always-On Mindset Core) + Layer 2 (Judgment Skill) are now active." -ForegroundColor Cyan
+Write-Host "[i] Note: The v1.3.0 Always-On Core architecture welcomes user testing and feedback." -ForegroundColor Yellow
 Write-Host "=============================================" -ForegroundColor Cyan

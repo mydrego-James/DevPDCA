@@ -1,8 +1,8 @@
 {
   "name": "devpdca",
   "displayName": "DevPDCA",
-  "version": "1.2.0",
-  "description": "A standalone development judgment skill for AI agents with a lightweight convergence check.",
+  "version": "1.3.0",
+  "description": "The core behavioral judgment layer for AI agents: enforces an always-on mindset core and a continuous five-move judgment process between the Agent Core and Domain Skills.",
   "author": {
     "name": "mydrego-James"
   },
@@ -10,8 +10,9 @@
   "keywords": [
     "pdca",
     "judgment",
-    "convergence",
-    "verification",
+    "core-behavior",
+    "direction-stability",
+    "context-preservation",
     "software-engineering"
   ]
 }
